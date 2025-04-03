@@ -5,4 +5,5 @@ public enum Category {
     HOME,
     HOBBIES,
     CLOTHING,
+    ELECTRONICS
 }
