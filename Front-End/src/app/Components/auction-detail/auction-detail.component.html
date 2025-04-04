@@ -33,32 +33,42 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="interest">
-                                    <p><br>Interested to place a bid?</p>
-                                    <a *ngIf="userId == undefined" href="/Login" class="btn btn-primary btn-bid">
-                                        Register to Bid
-                                    </a>
-                                    <div *ngIf="userId !== undefined" class="container mt-5">
-                                        <div class="row justify-content-center">
-                                            <div class="col-md-6">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h2 class="card-title mb-2">Add Bid</h2>
-                                                        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-                                                            <div class="form-floating mb-3">
-                                                                <label for="price">Price en DT: </label>
-                                                                <input type="number" class="form-control" id="price"
-                                                                    formControlName="price" required>
-                                                            </div>
-                                                            <button type="submit"
-                                                                class="btn btn-primary btn-orange  w-100 mt-3">Bid</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                               <!-- ... other markup such as header and auction details ... -->
+
+<div class="interest">
+    <p><br>Interested to place a bid?</p>
+    <a *ngIf="userId == undefined" href="/Login" class="btn btn-primary btn-bid">
+        Register to Bid
+    </a>
+    <div *ngIf="userId !== undefined">
+        <!-- If the auction is not over, show the bid form; otherwise show a message -->
+        <div *ngIf="!auctionOver; else auctionClosed" class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-2">Add Bid</h2>
+                            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+                                <div class="form-floating mb-3">
+                                    <label for="price">Price en DT: </label>
+                                    <input type="number" class="form-control" id="price" formControlName="price" required>
                                 </div>
+                                <button type="submit" class="btn btn-primary btn-orange w-100 mt-3">Bid</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #auctionClosed>
+            <p style="color:red; font-weight:bold;">Auction over</p>
+        </ng-template>
+    </div>
+    <p class="mb-0 mt-3">For Bid Battle Only.</p>
+</div>
+
+<!-- ... any remaining markup ... -->
+
                                 <p class="mb-0 mt-3">For Bid Battle Only.</p>
                             </div>
                         </div>
