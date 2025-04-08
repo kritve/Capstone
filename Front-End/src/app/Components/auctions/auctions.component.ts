@@ -9,28 +9,64 @@ import { AuctionDetails } from 'src/app/models/AuctionDetails';
     standalone: false
 })
 export class AuctionsComponent {
-  auctions!: AuctionDetails[];
+  // auctions!: AuctionDetails[];
+  allAuctions: AuctionDetails[] = [];
+  auctions: AuctionDetails[] = [];
 
   constructor(private auctionService: AuctionService) {}
 
   ngOnInit() {
     this.auctionService.getAuctions().subscribe((auctions: AuctionDetails[]) => {
-      this.auctions = auctions;
-      console.log(auctions);
-      console.log()
+      this.allAuctions = auctions;
+      this.auctions = [...auctions]; // clone
     });
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue);
-    if(filterValue!=""){
-      this.auctions = this.auctions.filter(item => item.product.name
-        .toLowerCase().startsWith(filterValue
-        .toLowerCase()));
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+
+  if (filterValue !== "") {
+    this.auctions = this.allAuctions.filter(item =>
+      item.product.name.toLowerCase().includes(filterValue)
+    );
+  } else {
+    this.auctions = [...this.allAuctions]; // reset to original
+  }
+  }
+
+  getImagePath(category : string) : string {
+    switch(category) {
+      case "VEHICLES":
+        return "../../../assets/images/vehicles.png";
+      case "HOME":
+        return "../../../assets/images/homes.png";
+      case "HOBBIES":
+        return "../../../assets/images/hobbies.png";
+      case "CLOTHING":
+        return "../../../assets/images/clothing.png";
+      case "ELECTRONICS":
+        return "../../../assets/images/electronics.jpg";
+      
     }
-    if(filterValue=="") {
-      this.ngOnInit();
+    return "";
+  }
+
+  sortAuctions(type: string) {
+    switch (type) {
+      case 'latest':
+        this.auctions.sort((a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime());
+        break;
+      case 'nearest':
+        this.auctions.sort((a, b) => new Date(a.endDate).getTime() - new Date(b.endDate).getTime());
+        break;
+      case 'lowestPrice':
+        this.auctions.sort((a, b) => a.minPrice - b.minPrice);
+        break;
+      case 'highestPrice':
+        this.auctions.sort((a, b) => b.minPrice - a.minPrice);
+        break;
     }
   }
+
+  
 }

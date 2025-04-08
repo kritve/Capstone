@@ -4,8 +4,10 @@ export interface Auction {
   product: {
     name: string;
     category: string;
+    
   };
   minPrice: number;
   endDate: Date;
+  userId?: number;
 }
 

@@ -14,6 +14,7 @@ import java.util.Date;
 public class AuctionDetails {
     private long id;
     private Product product;
+    private String category;
     private int minPrice;
     private Date endDate;
     private AuctionStatus auctionStatus;

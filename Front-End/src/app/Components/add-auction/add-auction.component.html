@@ -21,8 +21,43 @@
 
                             <div class="form-floating mb-3">
                                 <label for="category">Category : </label>
-                                <input type="text" class="form-control" id="category" formControlName="category"
-                                    required>
+                                <select class="form-control" id="category" formControlName="category">
+                                    <option value="">-- Select Category --</option>
+                                    <option value="vehicles">VEHICLES</option>
+                                    <option value="home">HOME</option>
+                                    <option value="hobbies">HOBBIES</option>
+                                    <option value="clothing">CLOTHING</option>
+                                    <option value="electronics">ELECTRONICS</option>
+                                  </select>
+                                <!-- <button class="btn btn-link dropdown-toggle" type="button"
+                                                    id="dropdownMenuSort" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Category
+                                                </button>
+                                
+                                <button class="dropdown-item" href="#" (click)="chooseCategory('vehicles')" id="category" formControlName="category"
+                                required>
+                                    VEHICLES
+                                  </button>
+                                  <button class="dropdown-item" href="#" (click)="chooseCategory('home')" id="category" formControlName="category"
+                                  required>
+                                    HOME
+                                  </button>
+                                  <button class="dropdown-item" href="#" (click)="chooseCategory('hobbies')" id="category" formControlName="category"
+                                  required>
+                                    HOBBIES
+                                  </button>
+                                  <button class="dropdown-item" href="#" (click)="chooseCategory('clothing')" id="category" formControlName="category"
+                                  required>
+                                    CLOTHING
+                                  </button>
+                                  <button class="dropdown-item" href="#" (click)="chooseCategory('electronics')" id="category" formControlName="category"
+                                  required>
+                                    ELECTRONICS
+                                  </button> -->
+
+                                <!-- <input type="text" class="form-control" id="category" formControlName="category"
+                                    required> -->
                             </div>
 
                             <div class="form-floating mb-3">
@@ -37,6 +72,12 @@
                                     required>
                             </div>
 
+                            <!-- <div class="form-floating mb-3">
+                                <label for="endDate">Product Image :</label>
+                                <input type="file" class="form-control" id="prodImage" formControlName="prodImage"
+                                    required>
+                            </div> -->
+
                             <!--<button type="submit" class="btn btn-primary btn-orange  w-100 mt-3" (click)="login()">Login</button>
                     <button type="submit" class="btn btn-primary btn-orange  w-100 mt-3" [disabled]="addForm.invalid" routerLink="/Singin">Register</button>-->
 
@@ -49,54 +90,6 @@
     </div>
 
     <!------------------------------------------------------------------------------->
-
-    <footer>
-        <div class="container">
-            <div class="card-columns">
-                <div class="card">
-                    <div class="social">
-                        <a class="logo-footer" href="#">
-                            <img src="images/logo_bidonline%402x.png"
-                                srcset="https://bidonline.my/images/logo_bidonline.png 320w, https://bidonline.my/images/logo_bidonline@2x.png 767w, https://bidonline.my/images/logo_bidonline@3x.png 1200w"
-                                alt="Bidonline.my" width="135" /> </a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5>Bid Battle</h5>
-                    <ul class="list-unstyled text-small">
-                        <li>
-                            <a href="/Home">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Auctions">
-                                Auctions
-                            </a>
-                        </li>
-                        <li>
-                            <a href="about.html">
-                                About
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h5>Contact</h5>
-                    <ul class="list-unstyled text-small">
-                        <li>
-                            <i class="fad fa-phone-square-alt"></i>
-                            <a class="text-reset" href="tel:+60361378828">+216 93 337 330</a>
-                        </li>
-                        <li>
-                            <i class="fad fa-envelope"></i>
-                            <a class="text-reset" href="support@gmail.com">support&#64;gmail.com</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <app-footer></app-footer>
     <!------------------------------------------------------------------------------->
 </body>

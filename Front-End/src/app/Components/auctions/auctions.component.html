@@ -24,11 +24,6 @@
                                     <input matInput (keyup)="applyFilter($event)" type="text" class="form-control"
                                         placeholder="Search Keywords" name="keyword" value="">
                                 </div>
-
-
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-block" type="submit">Search</button>
-                                </div>
                             </div>
 
                         </div>
@@ -41,22 +36,22 @@
                                                 <button class="btn btn-link dropdown-toggle" type="button"
                                                     id="dropdownMenuSort" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
-                                                    Sort By Latest Auction Date
+                                                    Sort By
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuSort">
-                                                    <a class="dropdown-item"
-                                                        href="itemsaa87.html?parents%5B0%5D=CAR&amp;parents%5B1%5D=MACHINE&amp;parents%5B2%5D=MOTORBIKE&amp;sort=lastest_date">Sort
-                                                        By Latest Auction Date</a>
-                                                    <a class="dropdown-item"
-                                                        href="items4201.html?parents%5B0%5D=CAR&amp;parents%5B1%5D=MACHINE&amp;parents%5B2%5D=MOTORBIKE&amp;sort=nearest_date">Sort
-                                                        By Nearest Auction Date</a>
-                                                    <a class="dropdown-item"
-                                                        href="items2d4b.html?parents%5B0%5D=CAR&amp;parents%5B1%5D=MACHINE&amp;parents%5B2%5D=MOTORBIKE&amp;sort=lowest_price">Sort
-                                                        By Lowest Price</a>
-                                                    <a class="dropdown-item"
-                                                        href="items52ef.html?parents%5B0%5D=CAR&amp;parents%5B1%5D=MACHINE&amp;parents%5B2%5D=MOTORBIKE&amp;sort=highest_price">Sort
-                                                        By Highest Price</a>
-                                                </div>
+                                                    <button class="dropdown-item" href="#" (click)="sortAuctions('latest')">
+                                                      Sort By Latest Auction Date
+                                                    </button>
+                                                    <button class="dropdown-item" href="#" (click)="sortAuctions('nearest')">
+                                                      Sort By Nearest Auction Date
+                                                    </button>
+                                                    <button class="dropdown-item" href="#" (click)="sortAuctions('lowestPrice')">
+                                                      Sort By Lowest Price
+                                                    </button>
+                                                    <button class="dropdown-item" href="#" (click)="sortAuctions('highestPrice')">
+                                                      Sort By Highest Price
+                                                    </button>
+                                                  </div>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +66,7 @@
                                         [queryParams]="{ auctionId:auction.id, auctionMinPrice:auction.minPrice }"
                                         class="card card-property">
                                         <div class="card-header">
-                                            <img class="cover" src="assets/images/cover_about.png" />
+                                            <img class="cover"  src={{getImagePath(auction.product.category)}} />
                                         </div>
                                         <div class="card-body">
                                             <h5>{{ auction.product.name}}</h5>
@@ -83,7 +78,7 @@
                                                 <span><i class=""> Product name : </i>{{ auction.product.name}}</span>
                                             </div>
                                             <div class="built">
-                                                <span><i class=""> Minimum price : </i>{{ auction.minPrice }} TND</span>
+                                                <span><i class=""> Minimum price : </i>{{ auction.minPrice }} Rupees</span>
                                             </div>
                                             <span><i class=""> End date : </i>{{ auction.endDate | date:'medium' }}</span>
                                             <hr>
@@ -101,54 +96,6 @@
     </div>
 
     <!------------------------------------------------------------------------------->
-
-    <footer>
-        <div class="container">
-            <div class="card-columns">
-                <div class="card">
-                    <div class="social">
-                        <a class="logo-footer" href="#">
-                            <img src="images/logo_bidonline%402x.png"
-                                srcset="https://bidonline.my/images/logo_bidonline.png 320w, https://bidonline.my/images/logo_bidonline@2x.png 767w, https://bidonline.my/images/logo_bidonline@3x.png 1200w"
-                                alt="Bidonline.my" width="135" /> </a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5>Bid Battle</h5>
-                    <ul class="list-unstyled text-small">
-                        <li>
-                            <a href="/Home">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Auctions">
-                                Auctions
-                            </a>
-                        </li>
-                        <li>
-                            <a href="about.html">
-                                About
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h5>Contact</h5>
-                    <ul class="list-unstyled text-small">
-                        <li>
-                            <i class="fad fa-phone-square-alt"></i>
-                            <a class="text-reset" href="tel:+60361378828">+216 93 337 330</a>
-                        </li>
-                        <li>
-                            <i class="fad fa-envelope"></i>
-                            <a class="text-reset" href="support@gmail.com">support&#64;gmail.com</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <app-footer></app-footer>
     <!------------------------------------------------------------------------------->
 </body>

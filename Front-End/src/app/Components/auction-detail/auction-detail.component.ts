@@ -35,6 +35,7 @@ export class AuctionDetailComponent {
     // Retrieve the auction details and determine if it is over
     this.auctionService.getAuction(this.auctionId).subscribe(auction => {
       this.auction = auction;
+      console.log(auction.userId)
       this.auctionOver = new Date(this.auction.endDate) < new Date();
     });
 
@@ -59,32 +60,45 @@ export class AuctionDetailComponent {
       alert('Auction is over. You cannot place a bid.');
       return;
     }
-
-    // Prevent the same user who placed the auction from bidding.
-    if (this.userId === this.auction.id) {
+  
+    // Prevent the same user who placed the auction from bidding (front-end validation).
+    if (this.userId === this.auction.userId) {
       alert("You cannot bid on your own auction.");
       return;
     }
-
+  
     // Ensure the bid is higher than the current price or the minimum price.
     if (price <= this.currentPrice) {
       alert(`Your bid must be higher than the current price of ${this.currentPrice} TND.`);
       return;
     }
-
+  
     // Proceed to place the bid
     if (this.userId) {
       const bid: Bid = {
         userId: this.userId,
         price: price
       };
-      this.auctionService.addBid(this.auctionId, bid).subscribe(id => {
-        console.log(id);
-        alert("Bid succeeded");
-        this.router.navigate(['/Auctions']);
+  
+      this.auctionService.addBid(this.auctionId, bid).subscribe({
+        next: id => {
+          console.log(id);
+          alert("Bid succeeded");
+          this.router.navigate(['/Auctions']);
+        },
+        error: err => {
+          // Display backend error message
+          if (err.status === 400 && err.error) {
+            alert(err.error); // Expected to be a string like "You cannot bid on your own auction."
+          } else {
+            alert("An unexpected error occurred. Please try again.");
+          }
+          console.error(err);
+        }
       });
     }
   }
+  
 
   onSubmit() {
     const bidPrice = this.myForm.value.price;
@@ -96,5 +110,22 @@ export class AuctionDetailComponent {
 
     // Submit the bid if all conditions are met
     this.addBid(bidPrice);
+  }
+
+  // Method to get the image path based on the category
+  getImagePath(category: string): string {
+    switch(category) {
+      case "VEHICLES":
+        return "../../../assets/images/vehicles.png";
+      case "HOME":
+        return "../../../assets/images/homes.png";
+      case "HOBBIES":
+        return "../../../assets/images/hobbies.png";
+      case "CLOTHING":
+        return "../../../assets/images/clothing.png";
+      case "ELECTRONICS":
+        return "../../../assets/images/electronics.jpg";
+    }
+    return "";
   }
 }
